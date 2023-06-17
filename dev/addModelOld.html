@@ -1,0 +1,644 @@
+<div class="modal fade" id="inline-create-dialog" tabindex="0" role="dialog" aria-labelledby="owner-inline-create-dialog-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="owner-inline-create-dialog-label">
+                    Add owner
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body bg-light">
+                <form method="post"
+                      id="owner-inline-create-form"
+                      action="#"
+                      onsubmit="return false"
+                >
+                    <input type="hidden" name="_token" value="M9jIPJJjHty3qvEbg0unHReE2hBmaXsNJoMsMmDo">
+                    <!-- load the view from the application if it exists, otherwise load the one in the package -->
+                    <input type="hidden" name="_http_referrer" value=http://127.0.0.1:8000/admin/pet-shop/invoice/create>
+                    <div class="card">
+                        <div class="card-body row">
+                            <!-- load the view from type and view_namespace attribute if set -->
+                            <!-- text input -->
+                            <div
+                                    class="form-group col-sm-12 required"
+                                    element="div"
+                            >
+                                <label>Name</label>
+                                <input
+                                        type="text"
+                                        name="name"
+                                        value=""
+                                        class="form-control"
+                                >
+                            </div>
+                            <!-- load the view from type and view_namespace attribute if set -->
+                            <!-- browse server input -->
+                            <div
+                                    class="form-group col-sm-12 required"
+                                    element="div"
+                            >
+                                <label>Avatar</label>
+                                <div class="input-group">
+                                    <input
+                                            type="text"
+                                            name="avatar[url]"
+                                            value=""
+                                            data-init-function="bpFieldInitBrowseElement"
+                                            data-elfinder-trigger-url="http://127.0.0.1:8000/admin/elfinder/popup"
+                                            class="form-control"
+
+                                            readonly 		>
+                                    <span class="input-group-append">
+                                                        <button type="button" data-inputid="avatar[url]-filemanager" class="btn btn-light btn-sm popup_selector">
+                                                            <i class="la la-cloud-upload"></i> Browse uploads
+                                                        </button>
+                                                        <button type="button" data-inputid="avatar[url]-filemanager" class="btn btn-light btn-sm clear_elfinder_picker">
+                                                            <i class="la la-eraser"></i> Clear
+                                                        </button>
+                                                    </span>
+                                </div>
+                                <p class="help-block">
+                                    <small class="float-right">Edit one attribute on a
+                                        <code>morphOne</code> related item (1-1).
+                                    </small>
+                                </p>
+                            </div>
+                            <!-- load the view from type and view_namespace attribute if set -->
+                            <div
+                                    class="form-group col-sm-12"
+                                    element="div"
+                            >
+                                <label>Pets</label>
+                                <input
+                                        type="hidden"
+                                        name="pets"
+                                        data-init-function="bpFieldInitRepeatableElement"
+                                        class="form-control"
+                                >
+                                <div class="container-repeatable-elements">
+                                    <div
+                                            data-repeatable-holder="pets"
+                                            data-init-rows="0"
+                                            data-max-rows="0"
+                                            data-min-rows="0"
+                                    ></div>
+                                </div>
+                                <p class="help-block text-muted text-sm">
+                                    <small class="float-right">Choose related entries with a
+                                        <code>belongsToMany</code> relationship and pivot fields (n-n with pivot).
+                                    </small>
+                                </p>
+                                <button type="button" class="btn btn-outline-primary btn-sm ml-1 add-repeatable-element-button">+ New Item</button>
+                            </div>
+                            <!-- load the view from type and view_namespace attribute if set -->
+                            <div
+                                    class="form-group col-sm-12"
+                                    element="div"
+                            >
+                                <label>Comments</label>
+                                <input type="hidden" name="comments" value=""  />
+                                <select
+                                        style="width:100%"
+                                        name="comments[]"
+                                        data-init-function="bpFieldInitRelationshipSelectElement"
+                                        data-field-is-inline="true"
+                                        data-column-nullable="true"
+                                        data-placeholder="Select entries"
+                                        data-field-multiple="true"
+                                        data-language="en"
+                                        data-is-pivot-select=false
+
+                                        class="form-control"
+
+                                        multiple
+                                ></select>
+                                <p class="help-block">
+                                    <small class="float-right">Choose related entries with a
+                                        <code>morphMany</code> relationship (1-n).
+                                    </small>
+                                </p>
+                            </div>
+                            <!-- load the view from type and view_namespace attribute if set -->
+                            <div
+                                    class="form-group col-sm-12"
+                                    element="div"
+                            >
+                                <label>Badges</label>
+                                <input
+                                        type="hidden"
+                                        name="badges"
+                                        data-init-function="bpFieldInitRepeatableElement"
+                                        class="form-control"
+                                >
+                                <div class="container-repeatable-elements">
+                                    <div
+                                            data-repeatable-holder="badges"
+                                            data-init-rows="0"
+                                            data-max-rows="0"
+                                            data-min-rows="0"
+                                    ></div>
+                                </div>
+                                <p class="help-block text-muted text-sm">
+                                    <small class="float-right">Choose related entries with a
+                                        <code>morphToMany</code> relationship and pivot fields (n-n with pivot).
+                                    </small>
+                                </p>
+                                <button type="button" class="btn btn-outline-primary btn-sm ml-1 add-repeatable-element-button">+ New Item</button>
+                            </div>
+                            <!--  This is where modal fields assets are pushed.
+We bind the modal content including what fields pushed to this stacks to the end of the body tag,
+so we make sure all backpack assets are previously loaded, like jquery etc.
+
+We can give the same stack name because backpack `crud_fields_scripts` is already rendered and
+this is the only available when rendering the modal html.
+-->
+                            <!-- include browse server js -->
+                            <script src="http://127.0.0.1:8000/packages/jquery-colorbox/jquery.colorbox-min.js"></script>
+                            <script type="text/javascript">
+                                // this global variable is used to remember what input to update with the file path
+                                // because elfinder is actually loaded in an iframe by colorbox
+                                var elfinderTarget = false;
+
+                                // function to update the file selected by elfinder
+                                function processSelectedFile(filePath, requestingField) {
+                                    elfinderTarget.val(filePath.replace(/\/g,"/"));
+                                    elfinderTarget = false;
+                                }
+
+                                function bpFieldInitBrowseElement(element) {
+                                    var triggerUrl = element.data('elfinder-trigger-url')
+                                    var name = element.attr('name');
+
+                                    element.siblings('.input-group-append').children('button.popup_selector').click(function (event) {
+                                        event.preventDefault();
+
+                                        elfinderTarget = element;
+
+                                        // trigger the reveal modal with elfinder inside
+                                        $.colorbox({
+                                            href: triggerUrl + '/' + name,
+                                            fastIframe: true,
+                                            iframe: true,
+                                            width: '80%',
+                                            height: '80%'
+                                        });
+                                    });
+
+                                    element.siblings('.input-group-append').children('button.clear_elfinder_picker').click(function (event) {
+                                        event.preventDefault();
+                                        element.val("");
+                                    });
+                                }
+                            </script>
+                            <!-- include select2 js-->
+                            <script src="http://127.0.0.1:8000/packages/select2/dist/js/select2.full.min.js"></script>
+                            <script>
+                                // if nullable, make sure the Clear button uses the translated string
+                                document.styleSheets[0].addRule('.select2-selection__clear::after','content:  "Clear";');
+
+
+                                /**
+                                 *
+                                 * This method gets called automatically by Backpack:
+                                 *
+                                 * @param    node element The jQuery-wrapped "select" element.
+                                 * @return  void
+                                 */
+                                function bpFieldInitRelationshipSelectElement(element) {
+                                    var $placeholder = element.attr('data-placeholder');
+                                    var $multiple = element.attr('data-field-multiple')  == 'false' ? false : true;
+                                    var $allows_null = (element.attr('data-column-nullable') == 'true') ? true : false;
+                                    var $allowClear = $allows_null;
+                                    var $isFieldInline = element.data('field-is-inline');
+                                    var $isPivotSelect = element.data('is-pivot-select');
+
+                                    const changePivotOptionState = function(pivot_selector, enable = true) {
+                                        let pivots_container = pivot_selector.closest('div[data-repeatable-holder='+pivot_selector.data('repeatable-input-name')+']');
+
+                                        $(pivots_container).children().each(function(i,container) {
+                                            $(container).find('select').each(function(i, el) {
+
+                                                if(typeof $(el).attr('data-is-pivot-select') !== 'undefined' && $(el).attr('data-is-pivot-select')) {
+                                                    if(pivot_selector.val()) {
+                                                        if(enable) {
+                                                            $(el).find('option[value='+pivot_selector.val()+']').prop('disabled',false);
+                                                        }else{
+                                                            if($(el).val() !== pivot_selector.val()) {
+                                                                $(el).find('option[value='+pivot_selector.val()+']').prop('disabled',true);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    };
+
+                                    const disablePreviouslySelectedPivots = function(pivot_selector) {
+                                        let pivots_container = pivot_selector.closest('div[data-repeatable-holder='+pivot_selector.data('repeatable-input-name')+']');
+                                        let selected_values = [];
+                                        let select_inputs = [];
+
+                                        $(pivots_container).children().each(function(i,container) {
+                                            $(container).find('select').each(function(i, el) {
+                                                if(typeof $(el).attr('data-is-pivot-select') !== 'undefined' && $(el).attr('data-is-pivot-select')) {
+                                                    select_inputs.push(el);
+                                                    if($(el).val()) {
+                                                        selected_values.push($(el).val());
+                                                    }
+                                                }
+                                            });
+                                        });
+
+                                        select_inputs.forEach(function(input) {
+                                            selected_values.forEach(function(value) {
+                                                if(value !== $(input).val()) {
+                                                    $(input).find('option[value='+value+']').prop('disabled',true);
+                                                }
+                                            });
+                                        });
+                                    };
+
+                                    var $select2Settings = {
+                                        theme: 'bootstrap',
+                                        multiple: $multiple,
+                                        placeholder: $placeholder,
+                                        allowClear: $allowClear,
+                                        dropdownParent: $isFieldInline ? $('#inline-create-dialog .modal-content') : document.body
+                                    };
+                                    if (!$(element).hasClass("select2-hidden-accessible"))
+                                    {
+                                        $(element).select2($select2Settings);
+                                        disablePreviouslySelectedPivots($(element));
+                                    }
+
+                                    if($isPivotSelect) {
+                                        $(element).on('select2:selecting', function(e) {
+                                            if($(this).val()) {
+                                                changePivotOptionState($(this));
+                                            }
+                                            return true;
+                                        });
+
+                                        $(element).on('select2:select', function(e) {
+                                            changePivotOptionState($(this), false);
+                                            return true;
+                                        });
+
+                                        $(element).on('backpack_field.deleted', function(e) {
+                                            changePivotOptionState($(this));
+                                            return true;
+                                        });
+                                    }
+
+                                }
+                            </script>
+                            <script>
+                                /**
+                                 * Takes all inputs in a repeatable element and makes them an object.
+                                 */
+                                function repeatableElementToObj(element) {
+                                    var obj = {};
+
+                                    element.find('input, select, textarea').each(function () {
+                                        if ($(this).data('repeatable-input-name')) {
+                                            obj[$(this).data('repeatable-input-name')] = $(this).val();
+                                        }
+                                    });
+
+                                    return obj;
+                                }
+
+                                /**
+                                 * The method that initializes the javascript on this field type.
+                                 */
+                                function bpFieldInitRepeatableElement(element) {
+
+                                    var field_name = element.attr('name');
+
+                                    var container_holder = $('[data-repeatable-holder='+field_name+']');
+
+                                    var init_rows = Number(container_holder.attr('data-init-rows'));
+                                    var min_rows = Number(container_holder.attr('data-min-rows'));
+                                    var max_rows = Number(container_holder.attr('data-max-rows')) || Infinity;
+
+                                    // make a copy of the group of inputs in their default state
+                                    // this way we have a clean element we can clone when the user
+                                    // wants to add a new group of inputs
+                                    var container = $('[data-repeatable-identifier='+field_name+']').last();
+
+                                    // make sure the inputs get the data-repeatable-input-name
+                                    // so we can know that they are inside repeatable
+                                    container.find('input, select, textarea')
+                                        .each(function(){
+                                            var name_attr = getCleanNameArgFromInput($(this));
+                                            $(this).attr('data-repeatable-input-name', name_attr)
+                                        });
+
+                                    var field_group_clone = container.clone();
+                                    container.remove();
+
+                                    element.parent().find('.add-repeatable-element-button').click(function(){
+                                        newRepeatableElement(container_holder, field_group_clone);
+                                    });
+
+                                    var container_rows = container_holder.children().length;
+                                    var add_entry_button = element.parent().find('.add-repeatable-element-button');
+                                    if(container_rows === 0) {
+                                        for(let i = 0; i < Math.min(init_rows, max_rows || init_rows); i++) {
+                                            container_rows++;
+                                            add_entry_button.trigger('click');
+                                        }
+                                    }
+
+                                    setupElementRowsNumbers(container_holder);
+
+                                    setupElementCustomSelectors(container_holder);
+
+                                    setupRepeatableDeleteRowButtons(container_holder);
+
+                                    setupRepeatableReorderButtons(container_holder);
+
+                                    updateRepeatableRowCount(container_holder);
+                                }
+
+                                /**
+                                 * Adds a new field group to the repeatable input.
+                                 */
+                                function newRepeatableElement(container_holder, field_group, repeatable_element, position) {
+
+                                    var new_field_group = field_group.clone();
+
+                                    // we push the fields to the correct container in page.
+                                    var $children = container_holder.children();
+
+                                    if (!Number.isInteger(position) || $children.length - 1 < position) {
+                                        container_holder.append(new_field_group);
+                                    } else {
+                                        $children.eq(position).before(repeatable_element);
+                                    }
+
+                                    // after appending to the container we reassure row numbers
+                                    setupElementRowsNumbers(container_holder);
+
+                                    // we also setup the custom selectors in the elements so we can use dependant functionality
+                                    setupElementCustomSelectors(container_holder);
+
+                                    setupRepeatableDeleteRowButtons(container_holder);
+
+                                    setupRepeatableReorderButtons(container_holder);
+
+                                    // updates the row count in repeatable and handle the buttons state
+                                    updateRepeatableRowCount(container_holder);
+
+                                    // re-index the array names for the fields
+                                    updateRepeatableContainerNamesIndexes(container_holder);
+
+                                    initializeFieldsWithJavascript(container_holder);
+
+                                    if (Number.isInteger(position)) {
+                                        // Trigger change for elements that have moved
+                                        new_field_group.find('input, select, textarea').each(function(i, el) {
+                                            $(el).trigger('change');
+                                        });
+                                    }
+                                }
+
+                                function setupRepeatableDeleteRowButtons(container) {
+                                    container.children().each(function(i, repeatable_group) {
+                                        setupRepeatableDeleteButtonEvent(repeatable_group);
+                                    });
+                                }
+
+                                function setupRepeatableDeleteButtonEvent(repeatable_group) {
+                                    let row = $(repeatable_group);
+                                    let delete_button = row.find('.delete-element');
+
+                                    // remove previous events on this button
+                                    delete_button.off('click');
+
+                                    delete_button.click(function(){
+
+                                        let $repeatableElement = $(this).closest('.repeatable-element');
+                                        let container = $('[data-repeatable-holder='+$($repeatableElement).attr('data-repeatable-identifier')+']')
+
+                                        row.find('input, select, textarea').each(function(i, el) {
+                                            // we trigger this event so fields can intercept when they are beeing deleted from the page
+                                            // implemented because of ckeditor instances that stayed around when deleted from page
+                                            // introducing unwanted js errors and high memory usage.
+                                            $(el).trigger('backpack_field.deleted');
+                                        });
+
+                                        $repeatableElement.remove();
+
+                                        // updates the row count and handle button state
+                                        updateRepeatableRowCount(container);
+
+                                        //we reassure row numbers on delete
+                                        setupElementRowsNumbers(container);
+
+                                        updateRepeatableContainerNamesIndexes(container);
+                                    });
+                                }
+
+                                function setupRepeatableReorderButtons(container) {
+                                    container.children().each(function(i, repeatable_group) {
+                                        setupRepeatableReorderButtonEvent($(repeatable_group));
+                                    });
+                                }
+
+                                function setupRepeatableReorderButtonEvent(repeatable_group) {
+                                    let row = $(repeatable_group);
+                                    let reorder_buttons = row.find('.move-element-up, .move-element-down');
+
+                                    // remove previous events on this button
+                                    reorder_buttons.off('click');
+
+                                    reorder_buttons.click(function(e){
+
+                                        let $repeatableElement = $(e.target).closest('.repeatable-element');
+                                        let container = $('[data-repeatable-holder='+$($repeatableElement).attr('data-repeatable-identifier')+']')
+
+                                        // get existing values
+                                        let index = $repeatableElement.index();
+
+                                        index += $(this).is('.move-element-up') ? -1 : 1;
+
+                                        if (index < 0) return;
+
+                                        // trigger delete for existing element
+                                        row.find('input, select, textarea').each(function(i, el) {
+                                            // we trigger this event so fields can intercept when they are beeing deleted from the page
+                                            // implemented because of ckeditor instances that stayed around when deleted from page
+                                            // introducing unwanted js errors and high memory usage.
+                                            $(el).trigger('backpack_field.deleted');
+                                        });
+
+                                        let $toCreate = $repeatableElement.clone();
+
+                                        // remove element
+                                        $repeatableElement.remove();
+
+                                        // create new element with existing values in desired position
+                                        newRepeatableElement(container, repeatable_group, $toCreate, index);
+                                    });
+                                }
+
+                                // this function is responsible for managing rows numbers upon creation/deletion of elements
+                                function setupElementRowsNumbers(container) {
+                                    var number_of_rows = 0;
+                                    container.children().each(function(i, el) {
+                                        var rowNumber = i+1;
+                                        $(el).attr('data-row-number', rowNumber);
+                                        //also attach the row number to all the input elements inside
+                                        $(el).find('input, select, textarea').each(function(i, input) {
+                                            // only add the row number to inputs that have name, so they are going to be submited in form
+                                            if($(input).attr('name')) {
+                                                $(input).attr('data-row-number', rowNumber);
+                                            }
+
+                                            if($(input).is('[data-reorder-input]')) {
+                                                $(input).val(rowNumber);
+                                            }
+                                        });
+                                        number_of_rows++;
+                                    });
+
+                                    container.attr('number-of-rows', number_of_rows);
+                                }
+
+                                // this function is responsible for adding custom selectors to repeatable inputs that are selects and could be used with
+                                // dependant fields functionality
+                                function setupElementCustomSelectors(container) {
+                                    container.children().each(function(i, el) {
+                                        // attach a custom selector to this elements
+                                        $(el).find('select').each(function(i, select) {
+                                            let selector = '[data-repeatable-input-name="%DEPENDENCY%"][data-row-number="%ROW%"],[data-repeatable-input-name="%DEPENDENCY%[]"][data-row-number="%ROW%"]';
+                                            select.setAttribute('data-custom-selector', selector);
+                                        });
+                                    });
+                                }
+
+                                function updateRepeatableContainerNamesIndexes(container) {
+                                    container.children().each(function(i, repeatable) {
+                                        var index = $(repeatable).attr('data-row-number')-1;
+                                        // updates the indexes in the array of repeatable inputs
+                                        $(repeatable).find('input, select, textarea').each(function(i, el) {
+                                            if(typeof $(el).attr('data-row-number') !== 'undefined') {
+                                                let field_name = $(el).attr('data-repeatable-input-name') ?? $(el).attr('name') ?? $(el).parent().find('input[data-repeatable-input-name]').first().attr('data-repeatable-input-name');
+                                                let suffix = '';
+                                                // if there are more than one "[" character, that means we already have the repeatable name
+                                                // we need to parse that name to get the "actual" field name.
+                                                if(field_name.endsWith("[]")) {
+                                                    suffix = "[]";
+                                                    field_name = field_name.slice(0,-2);
+                                                }
+                                                if(field_name.split('[').length - 1 > 1) {
+                                                    let field_name_position = field_name.lastIndexOf('[');
+                                                    // field name will contain the closing "]" that's why the last slice.
+                                                    field_name = field_name.substring(field_name_position + 1).slice(0,-1);
+                                                }
+
+                                                if(typeof $(el).attr('data-repeatable-input-name') === 'undefined') {
+                                                    $(el).attr('data-repeatable-input-name', field_name);
+                                                }
+
+                                                $(el).attr('name', container.attr('data-repeatable-holder')+'['+index+']['+field_name+']'+suffix);
+                                            }
+                                        });
+                                    });
+                                }
+
+                                // return the clean name from the input
+                                function getCleanNameArgFromInput(element) {
+                                    if (element.data('repeatable-input-name')) {
+                                        return element.data('repeatable-input-name');
+                                    }
+                                    if (element.data('name')) {
+                                        return element.data('name');
+                                    } else if (element.attr('name')) {
+                                        return element.attr('name');
+                                    }
+                                }
+
+                                // update the container current number of rows and work out the buttons state
+                                function updateRepeatableRowCount(container) {
+                                    let max_rows = Number(container.attr('data-max-rows')) || Infinity;
+                                    let min_rows = Number(container.attr('data-min-rows')) || 0;
+
+                                    let current_rows =  container.children().length;
+
+                                    // show or hide delete button
+                                    container.find('.delete-element').toggleClass('d-none', current_rows <= min_rows);
+
+                                    // show or hide move buttons
+                                    container.find('.move-element-up, .move-element-down').toggleClass('d-none', current_rows <= 1);
+
+                                    // show or hide new item button
+                                    container.parent().parent().find('.add-repeatable-element-button').toggleClass('d-none', current_rows >= max_rows);
+
+                                }
+
+                            </script>
+                            <!-- include browse server css -->
+                            <link href="http://127.0.0.1:8000/packages/jquery-colorbox/example2/colorbox.css" rel="stylesheet" type="text/css" />
+                            <style>
+                                #cboxContent, #cboxLoadedContent, .cboxIframe {
+                                    background: transparent;
+                                }
+                            </style>
+                            <!-- include select2 css-->
+                            <link href="http://127.0.0.1:8000/packages/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+                            <link href="http://127.0.0.1:8000/packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+                            <!-- no styles -->
+                            <style type="text/css">
+                                .repeatable-element {
+                                    border: 1px solid rgba(0,40,100,.12);
+                                    border-radius: 5px;
+                                    background-color: #f0f3f94f;
+                                }
+                                .container-repeatable-elements .controls {
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-content: center;
+                                    position: absolute !important;
+                                    left: -16px;
+                                    z-index: 2;
+                                }
+
+                                .container-repeatable-elements .controls button {
+                                    height: 30px;
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    background-color: #e8ebf0 !important;
+                                    margin-bottom: 2px;
+                                    overflow: hidden;
+                                }
+                                .container-repeatable-elements .controls button.move-element-up,
+                                .container-repeatable-elements .controls button.move-element-down {
+                                    height: 24px;
+                                    width: 24px;
+                                    margin: 2px auto;
+                                }
+                                .container-repeatable-elements .repeatable-element:first-of-type .move-element-up,
+                                .container-repeatable-elements .repeatable-element:last-of-type .move-element-down {
+                                    display: none;
+                                }
+                            </style>
+                            <!-- no styles -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
